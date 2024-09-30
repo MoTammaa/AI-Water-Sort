@@ -1,10 +1,12 @@
 package code.entites;
 
-public class Node {
+import code.WaterSortSearch;
+
+public class Node implements Comparable<Node> {
     public Action pour;
-    private State state;
+    private final State state;
     Node parent;
-    private int depth;
+    private final int depth;
 
     public Node(State state, Node parent, Action pour, int depth){
         this.state = state;
@@ -52,5 +54,11 @@ public class Node {
     }
     public int getDepth() {
         return depth;
+    }
+
+    @Override
+    public int compareTo(Node o) {
+        return WaterSortSearch.currentAgent.evalFn.EVAL_Fn(this, WaterSortSearch.heuristicVersion) -
+                WaterSortSearch.currentAgent.evalFn.EVAL_Fn(o, WaterSortSearch.heuristicVersion);
     }
 }

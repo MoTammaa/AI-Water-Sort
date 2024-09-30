@@ -1,6 +1,7 @@
 package code.search;
 
 import code.entites.Action;
+import code.entites.EvaluationFn;
 import code.entites.Node;
 import code.entites.State;
 
@@ -14,10 +15,14 @@ public abstract class GeneralSearch {
     Node solutionNode;
     State initialState;
     HashSet<State> explored;
-    int expandedNodesCount;
+    int expandedNodesCount = 0;
+
+    public EvaluationFn evalFn;
 
     public GeneralSearch(){
         nodes = new PriorityQueue<Node>();
+        explored = new HashSet<>();
+        evalFn = this::EVAL_Fn;
     }
 //    public GeneralSearch(State initialState){
 //        nodes = new PriorityQueue<Node>();
