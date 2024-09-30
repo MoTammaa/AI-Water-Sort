@@ -20,8 +20,8 @@ public class Node {
 
 
 
-    public boolean isGoal(State goal){
-        return state.equals(goal);
+    public boolean isGoal(){
+        return state.isGoal();
     }
 
     public boolean equals(Node node){

@@ -10,8 +10,7 @@ public abstract class GeneralSearch {
 
     PriorityQueue<Node> nodes;
     Node goalNode;
-    State initialState,
-            goalState;
+    State initialState;
 
     public GeneralSearch(){
         nodes = new PriorityQueue<Node>();
@@ -25,7 +24,7 @@ public abstract class GeneralSearch {
     }
 
     public boolean GoalTest(Node node){
-        if (node.isGoal(goalState)){
+        if (node.isGoal()){
             goalNode = node;
             return true;
         }
