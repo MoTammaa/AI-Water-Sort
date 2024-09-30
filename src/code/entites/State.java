@@ -77,4 +77,24 @@ public class State implements Cloneable {
         }
         return str.toString();
     }
+
+    public boolean applyAction(Action action) {
+        if (action.from == action.to)
+            return false;
+        if (bottles[action.from].isEmpty())
+            return false;
+        if (bottles[action.to].size() == WaterSortSearch.MAX_BOTTLE_CAPACITY)
+            return false;
+
+        Color color = bottles[action.from].getLast();
+        if (bottles[action.to].size() == WaterSortSearch.MAX_BOTTLE_CAPACITY || bottles[action.to].getLast() != color)
+            return false;
+
+        while (!bottles[action.from].isEmpty() &&
+                bottles[action.to].size() < WaterSortSearch.MAX_BOTTLE_CAPACITY &&
+                bottles[action.from].getLast() == color)
+            bottles[action.to].addLast(bottles[action.from].removeLast());
+
+        return true;
+    }
 }
