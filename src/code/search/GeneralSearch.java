@@ -18,6 +18,7 @@ public abstract class GeneralSearch {
     }
 
     public abstract int EVAL_Fn(Node node);
+    public abstract int EVAL_Fn(Node node, int version);
 
     public ArrayList<Node> EXPAND(Node node){
         return null;

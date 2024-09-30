@@ -1,10 +1,10 @@
 package code.entites;
 
 public class Node {
-    Action pour;
-    State state;
+    public Action pour;
+    private State state;
     Node parent;
-    int pathCost, depth;
+    private int pathCost, depth;
 
     public Node(State state, Node parent, Action pour, int pathCost, int depth){
         this.state = state;
@@ -34,5 +34,19 @@ public class Node {
 
     public String toString(){
         return state.toString();
+    }
+
+    // getters
+    public State getState() {
+        return state;
+    }
+    public Node getParent() {
+        return parent;
+    }
+    public int getPathCost() {
+        return pathCost;
+    }
+    public int getDepth() {
+        return depth;
     }
 }

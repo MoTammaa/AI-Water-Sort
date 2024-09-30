@@ -1,4 +1,7 @@
 package code.search;
 
-public class IDS extends GeneralSearch {
+import code.entites.Node;
+
+public class IDS extends DFS {
+   int depthLimit = 10;
 }
