@@ -1,9 +1,11 @@
 package code.search;
 
+import code.entites.Action;
 import code.entites.Node;
 import code.entites.State;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.PriorityQueue;
 
 public abstract class GeneralSearch {
@@ -11,6 +13,8 @@ public abstract class GeneralSearch {
     PriorityQueue<Node> nodes;
     Node solutionNode;
     State initialState;
+    HashSet<State> explored;
+    int expandedNodesCount;
 
     public GeneralSearch(){
         nodes = new PriorityQueue<Node>();
@@ -31,11 +35,24 @@ public abstract class GeneralSearch {
         return true;
     }
 
-    public abstract int EVAL_Fn(Node node);
+    public int EVAL_Fn(Node node) { return EVAL_Fn(node, 1); }
     public abstract int EVAL_Fn(Node node, int version);
 
     public ArrayList<Node> EXPAND(Node node){
-        return null;
+        ArrayList<Node> expandedNodes = new ArrayList<>();
+        if (explored.contains(node.getState())) return expandedNodes;
+
+        expandedNodesCount++;
+        explored.add(node.getState());
+        for (int from = 0; from < node.getState().getBottles().length; from++)
+            for (int to = 0; to < node.getState().getBottles().length; to++){
+                Action pour = new Action(from, to);
+                Node child = new Node(node);
+
+                if (child.applyAction(pour))
+                    expandedNodes.add(child);
+            }
+        return expandedNodes;
     }
 
     public boolean isSolutionFound() { return solutionNode != null; }

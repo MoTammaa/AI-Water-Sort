@@ -97,4 +97,14 @@ public class State implements Cloneable {
 
         return true;
     }
+
+
+    // getters
+    public ArrayList<Color>[] getBottles() {
+        return bottles;
+    }
+    public ArrayList<Color> getBottle(int index) {
+        return bottles[index];
+    }
+
 }
