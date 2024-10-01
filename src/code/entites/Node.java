@@ -6,21 +6,22 @@ public class Node implements Comparable<Node> {
     public Action pour;
     private final State state;
     Node parent;
-    private final int depth;
+    private final int depth, pathCost;
 
-    public Node(State state, Node parent, Action pour, int depth){
+    public Node(State state, Node parent, Action pour, int depth, int pathCost) {
         this.state = state;
         this.parent = parent;
         this.pour = pour;
         this.depth = depth;
+        this.pathCost = pathCost;
     }
 
     public Node(Node parent) {
-        this((State) parent.state.clone(), parent, null, parent.depth + 1);
+        this((State) parent.state.clone(), parent, null, parent.depth + 1, parent.pathCost);
     }
 
     public Node(State state){
-        this(state, null, null, 0);
+        this(state, null, null, 0, 0);
     }
 
 
@@ -54,6 +55,9 @@ public class Node implements Comparable<Node> {
     }
     public int getDepth() {
         return depth;
+    }
+    public int getPathCost() {
+        return pathCost;
     }
 
     @Override
