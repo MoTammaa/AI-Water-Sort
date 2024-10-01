@@ -5,7 +5,7 @@ import code.search.GeneralSearch;
 
 public class WaterSortSearch extends GeneralSearch {
     public static int MAX_BOTTLE_CAPACITY = 4,
-            BOTTLES_COUNT = 3;
+            BOTTLES_COUNT = 5;
 
     public static GeneralSearch currentAgent;
     public static int heuristicVersion = 1;

@@ -13,9 +13,9 @@ public abstract class GeneralSearch {
 
     PriorityQueue<Node> nodes;
     Node solutionNode;
-    State initialState;
+    public State initialState;
     HashSet<State> explored;
-    int expandedNodesCount = 0;
+    public int expandedNodesCount = 0;
 
     public EvaluationFn evalFn;
 
@@ -73,12 +73,25 @@ public abstract class GeneralSearch {
         return nodes.poll();
     }
 
+    public Node getFront(){
+        return nodes.peek();
+    }
+
     public void addNode(Node node){
+        if(node == null) throw new IllegalArgumentException("Node cannot be null");
         nodes.add(node);
     }
 
     public void addNodes(ArrayList<Node> nodes){
+        for (Node node : nodes) if(node == null) throw new IllegalArgumentException("Node cannot be null");
         this.nodes.addAll(nodes);
     }
+    public Node getSolutionNode() {
+        return solutionNode;
+    }
+    public int getExpandedNodesCount() {
+        return expandedNodesCount;
+    }
+
 
 }

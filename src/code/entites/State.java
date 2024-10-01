@@ -3,25 +3,31 @@ package code.entites;
 import code.WaterSortSearch;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 public class State implements Cloneable {
     private ArrayList<Color> [] bottles;
 
-    public State(){
-        bottles = new ArrayList[WaterSortSearch.BOTTLES_COUNT];
+    private void init(ArrayList<Color> [] bottles){
+        this.bottles = new ArrayList[WaterSortSearch.BOTTLES_COUNT];
         for (int i = 0; i < WaterSortSearch.BOTTLES_COUNT; i++)
-            bottles[i] = new ArrayList<>();
+            this.bottles[i] = bottles == null ? new ArrayList<>() : new ArrayList<>(bottles[i]);
+    }
+
+    public State(){
+        init(null);
     }
 
     public State(String input){
-        this();
         // parse input
         String [] params = input.split(";");
 
         WaterSortSearch.BOTTLES_COUNT = Integer.parseInt(params[0]);
         WaterSortSearch.MAX_BOTTLE_CAPACITY = Integer.parseInt(params[1]);
 
+        init(null);
         for (int i = 2; i < params.length; i++){
             String [] colors = params[i].split(",");
             for (String color : colors)
@@ -31,19 +37,29 @@ public class State implements Cloneable {
     }
 
     public State(State state){
-        bottles = new ArrayList[WaterSortSearch.BOTTLES_COUNT];
-        for (int i = 0; i < WaterSortSearch.BOTTLES_COUNT; i++)
-            bottles[i] = new ArrayList<>(state.bottles[i]);
+        init(state.bottles);
     }
 
 
     public boolean isGoal() {
+        HashSet<Color> goal = new HashSet<>();
         for (int i = 0; i < WaterSortSearch.BOTTLES_COUNT; i++)
         {
+            if (bottles[i].isEmpty())
+                continue;
             Color baseColor = bottles[i].getFirst();
+
+            // for now, we will assume that the goal is to have maximum 1 bottle with a specific color
+            // , and that means that the total number of layers of the same color is less than or equal Bottle Capacity
+            // TODO: ask TAs
+            if (goal.contains(baseColor))
+                return false;
+            goal.add(baseColor);
+
             for (Color color : bottles[i])
                 if (color != baseColor)
                     return false;
+
         }
         return true;
     }
@@ -70,9 +86,11 @@ public class State implements Cloneable {
     public String toString(){
         StringBuilder str = new StringBuilder();
         for (int i = 0; i < WaterSortSearch.BOTTLES_COUNT; i++){
-            str.append("Bottle ").append(i).append(": ");
-            for (Color color : bottles[i])
-                str.append(color).append(" ");
+            str.append("Bottle ").append(i).append(": ").append("top -> ");
+//            System.out.println(bottles.length);
+            for (int j = bottles[i].size() - 1; j >= 0; j--) {
+                str.append(bottles[i].get(j)).append(" ");
+            }
             str.append("\n");
         }
         return str.toString();
@@ -87,7 +105,7 @@ public class State implements Cloneable {
             return false;
 
         Color color = bottles[action.from].getLast();
-        if (bottles[action.to].size() == WaterSortSearch.MAX_BOTTLE_CAPACITY || bottles[action.to].getLast() != color)
+        if (bottles[action.to].size() == WaterSortSearch.MAX_BOTTLE_CAPACITY || (!bottles[action.to].isEmpty() && bottles[action.to].getLast() != color))
             return false;
 
         while (!bottles[action.from].isEmpty() &&
