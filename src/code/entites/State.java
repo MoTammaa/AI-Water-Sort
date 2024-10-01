@@ -64,6 +64,12 @@ public class State implements Cloneable {
         return true;
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if (obj instanceof State)
+            return equals((State) obj);
+        return false;
+    }
     public boolean equals(State state){
         for (int i = 0; i < WaterSortSearch.BOTTLES_COUNT; i++)
             if (!bottles[i].equals(state.bottles[i]))
@@ -96,24 +102,27 @@ public class State implements Cloneable {
         return str.toString();
     }
 
-    public boolean applyAction(Action action) {
+    public int applyAction(Action action) {
         if (action.from == action.to)
-            return false;
+            return 0;
         if (bottles[action.from].isEmpty())
-            return false;
+            return 0;
         if (bottles[action.to].size() == WaterSortSearch.MAX_BOTTLE_CAPACITY)
-            return false;
+            return 0;
 
         Color color = bottles[action.from].getLast();
         if (bottles[action.to].size() == WaterSortSearch.MAX_BOTTLE_CAPACITY || (!bottles[action.to].isEmpty() && bottles[action.to].getLast() != color))
-            return false;
+            return 0;
 
+        int count = 0;
         while (!bottles[action.from].isEmpty() &&
                 bottles[action.to].size() < WaterSortSearch.MAX_BOTTLE_CAPACITY &&
-                bottles[action.from].getLast() == color)
+                bottles[action.from].getLast() == color) {
             bottles[action.to].addLast(bottles[action.from].removeLast());
+            count++;
+        }
 
-        return true;
+        return count;
     }
 
 
@@ -123,6 +132,13 @@ public class State implements Cloneable {
     }
     public ArrayList<Color> getBottle(int index) {
         return bottles[index];
+    }
+
+
+    public static void main(String[] args) {
+        State state = new State("5;4;e,e,e,e,e;e,e,e,e,e;e,e,e,e,e;e,e,e,e,e;e,e,e,e,e");
+        State state2 = new State(state);
+        System.out.println(state.equals(state2));
     }
 
 }

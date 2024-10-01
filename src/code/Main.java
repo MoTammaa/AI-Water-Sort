@@ -26,11 +26,11 @@ public class Main {
 
 
         GeneralSearch search = new BFS();
-
-//        String init = "5;4;" + "b,y,r,b;" + "b,y,r,r;" + "y,r,b,y;" + "e,e,e,e;" + "e,e,e,e;";
-//        search.initialState = new State(init);
-        String p1 = "3;4;" + "b,b,r,r;" + "r,r,b,b;" + "e,e,e,e;";
-        search.initialState = new State(p1);
+//
+        String init = "5;4;" + "b,y,r,b;" + "b,y,r,r;" + "y,r,b,y;" + "e,e,e,e;" + "e,e,e,e;";
+        search.initialState = new State(init);
+//        String p1 = "3;4;" + "b,b,r,r;" + "r,r,b,b;" + "e,e,e,e;";
+//        search.initialState = new State(p1);
 
         search.addNode(new code.entites.Node(search.initialState));
         WaterSortSearch.currentAgent = search;
@@ -39,7 +39,7 @@ public class Main {
 //            System.out.println(search.getFront());
             search.SEARCH_NextStep();
             if(search.expandedNodesCount % 1000 == 0)
-                System.out.println(search.expandedNodesCount);
+                System.out.println(search.expandedNodesCount + "     " + search.getFront().getDepth());
         }
         Node current = search.getSolutionNode();
         StringBuilder sb = new StringBuilder();
@@ -47,6 +47,7 @@ public class Main {
             sb.insert(0, current + "\n\n");
             current = current.getParent();
         }
-        System.out.println(sb.toString());
+        System.out.println("\n\nDepth: " + search.getSolutionNode().getDepth() + "\n\nExpanded Nodes: " +search.expandedNodesCount + "\n\n" + sb.toString());
+
     }
 }

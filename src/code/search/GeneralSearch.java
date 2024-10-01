@@ -17,12 +17,9 @@ public abstract class GeneralSearch {
     HashSet<State> explored;
     public int expandedNodesCount = 0;
 
-    public EvaluationFn evalFn;
-
     public GeneralSearch(){
         nodes = new PriorityQueue<Node>();
         explored = new HashSet<>();
-        evalFn = this::EVAL_Fn;
     }
 //    public GeneralSearch(State initialState){
 //        nodes = new PriorityQueue<Node>();
@@ -54,7 +51,7 @@ public abstract class GeneralSearch {
                 Action pour = new Action(from, to);
                 Node child = new Node(node);
 
-                if (child.applyAction(pour))
+                if (child.applyAction(pour) > 0)
                     expandedNodes.add(child);
             }
         return expandedNodes;
