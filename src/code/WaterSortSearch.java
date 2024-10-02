@@ -11,19 +11,18 @@ public class WaterSortSearch extends GeneralSearch {
     public static GeneralSearch currentAgent;
     public static int heuristicVersion = 1;
 
+    public static boolean SHOW_DEBUG = false;
+
 
     public String solve(String initialState, String strategy, boolean visualize) {
-        init(initialState, strategy);
+        init(initialState, strategy, visualize);
 
-        while (!currentAgent.isSolutionFound()){
-            currentAgent.SEARCH_NextStep();
-            if(currentAgent.expandedNodesCount % 1000 == 0) System.out.println(currentAgent.expandedNodesCount + "     " + currentAgent.getFront().getDepth());
-        }
+        /* ****************************************** */
+        currentAgent.GENERAL_SEARCH();
+        /* ****************************************** */
 
         Node current = currentAgent.getSolutionNode();
-//        System.out.println(Node.getSolutionString(current));
-
-        if (visualize) {
+        if (SHOW_DEBUG) {
             StringBuilder sb = new StringBuilder();
             while (current != null){
                 sb.insert(0, current + "\n\n");
@@ -34,7 +33,8 @@ public class WaterSortSearch extends GeneralSearch {
         return Node.getSolutionString(currentAgent.getSolutionNode());
     }
 
-    private void init(String initialState, String strategy) {
+    private void init(String initialState, String strategy, boolean visualize) {
+        SHOW_DEBUG = visualize;
         int strategyVersion = 1;
         if (strategy.length() > 2) strategyVersion = strategy.charAt(2) - '0';
         strategy = strategy.substring(0, 2);

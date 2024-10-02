@@ -1,5 +1,6 @@
 package code.search;
 
+import code.WaterSortSearch;
 import code.entites.*;
 
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ public abstract class GeneralSearch {
     HashSet<State> explored;
     public int expandedNodesCount = 0;
 
+    private int MaxDepth = (int) 1e8;
+
     public GeneralSearch(){
         nodes = new PriorityQueue<Node>();
         explored = new HashSet<>();
@@ -22,6 +25,15 @@ public abstract class GeneralSearch {
 //        nodes = new PriorityQueue<Node>();
 //        this.initialState = initialState;
 //    }
+
+    public boolean GENERAL_SEARCH(){
+        while (!this.isSolutionFound()){
+            if(!this.SEARCH_NextStep()) return false;
+            if(this.expandedNodesCount % 1000 == 0 && WaterSortSearch.SHOW_DEBUG) System.out.println(this.expandedNodesCount + "     " + this.getFront().getDepth());
+        }
+
+        return true;
+    }
 
     public boolean SEARCH_NextStep(){
         if (nodes.isEmpty()) return false; // failure
@@ -78,7 +90,7 @@ public abstract class GeneralSearch {
 
     public void addNodes(ArrayList<Node> nodes){
         for (Node node : nodes) if(node == null) throw new IllegalArgumentException("Node cannot be null");
-        this.nodes.addAll(nodes);
+        this.nodes.addAll(nodes.stream().filter(node -> node.getDepth() < MaxDepth).toList());
     }
     public Node getSolutionNode() {
         return solutionNode;
