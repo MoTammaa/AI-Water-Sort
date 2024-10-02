@@ -7,4 +7,8 @@ public class Action {
         this.from = from;
         this.to = to;
     }
+
+    public String toString(){
+        return "pour_" + from + "_" + to;
+    }
 }

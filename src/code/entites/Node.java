@@ -50,7 +50,8 @@ public class Node implements Comparable<Node> {
     }
     public boolean equals(Node node){ return state.equals(node.state) && depth == node.depth && pathCost == node.pathCost; }
     public int hashCode(){ return state.hashCode() + depth + pathCost; }
-    public String toString(){ return "d: " + depth + ", Pcost: " + pathCost + "\n" + state.toString(); }
+    public String toString(){ return "d: " + depth + ", Pcost: " + pathCost +(pour ==null ? "" : ", pour: from " + pour.from + " to " + pour.to) +
+            "\n" + state.toString(); }
 
     // getters
     public State getState() { return state; }
@@ -62,6 +63,18 @@ public class Node implements Comparable<Node> {
     public int compareTo(Node o) {
         return WaterSortSearch.currentAgent.EVAL_Fn(this, WaterSortSearch.heuristicVersion) -
                 WaterSortSearch.currentAgent.EVAL_Fn(o, WaterSortSearch.heuristicVersion);
+    }
+
+    public static String getSolutionString(Node node){
+        if(node == null) return "NOSOLUTION";
+        StringBuilder plan = new StringBuilder();
+        Node current = node;
+        while (current != null && current.pour != null){
+            plan.insert(0, current.pour);
+            if(current.parent != null && current.parent.pour != null) plan.insert(0, ",");
+            current = current.parent;
+        }
+        return plan + ";" + node.pathCost + ";" + WaterSortSearch.currentAgent.getExpandedNodesCount();
     }
 
 

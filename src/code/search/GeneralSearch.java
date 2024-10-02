@@ -1,9 +1,6 @@
 package code.search;
 
-import code.entites.Action;
-import code.entites.EvaluationFn;
-import code.entites.Node;
-import code.entites.State;
+import code.entites.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,7 +10,7 @@ public abstract class GeneralSearch {
 
     PriorityQueue<Node> nodes;
     Node solutionNode;
-    public State initialState;
+    State initialState;
     HashSet<State> explored;
     public int expandedNodesCount = 0;
 
@@ -88,6 +85,15 @@ public abstract class GeneralSearch {
     }
     public int getExpandedNodesCount() {
         return expandedNodesCount;
+    }
+
+    protected static GeneralSearch getAgent(String strategy) {
+        return SearchStrategy.getSearchInstance(strategy);
+    }
+
+    public void setInitialState(State initialState) {
+        this.initialState = initialState;
+        nodes.add(new Node(initialState));
     }
 
 
