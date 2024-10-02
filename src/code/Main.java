@@ -29,9 +29,10 @@ public class Main {
         WaterSortSearch waterSortSearch = new WaterSortSearch();
         String p1 = "5;4;" + "b,y,r,b;" + "b,y,r,r;" + "y,r,b,y;" + "e,e,e,e;" + "e,e,e,e;";
         String p2 = "3;4;" + "b,b,r,r;" + "r,r,b,b;" + "e,e,e,e;";
+        String p3nosolution = "3;3;" + "b,r,r;" + "b,b,r;" + "y,e,e;";
 
 
-        System.out.println(waterSortSearch.solve(p1, "ID", true));
+        System.out.println(waterSortSearch.solve(p3nosolution, "AS", true));
 //        System.out.println(waterSortSearch.solve(p2, "DF", false));
     }
 }

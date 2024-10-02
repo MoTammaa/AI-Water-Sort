@@ -22,7 +22,7 @@ public class WaterSortSearch extends GeneralSearch {
         /* ****************************************** */
 
         Node current = currentAgent.getSolutionNode();
-        if (SHOW_DEBUG) {
+        if (SHOW_DEBUG && current != null){
             StringBuilder sb = new StringBuilder();
             while (current != null){
                 sb.insert(0, current + "\n\n");
