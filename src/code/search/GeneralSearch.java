@@ -15,7 +15,7 @@ public abstract class GeneralSearch {
     HashSet<State> explored;
     public int expandedNodesCount = 0;
 
-    private int MaxDepth = (int) 1e8;
+    protected int MaxDepth = (int) 1e8;
 
     public GeneralSearch(){
         nodes = new PriorityQueue<Node>();
@@ -106,6 +106,7 @@ public abstract class GeneralSearch {
     public void setInitialState(State initialState) {
         this.initialState = initialState;
         nodes.add(new Node(initialState));
+        explored.clear();
     }
 
 

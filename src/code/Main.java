@@ -31,7 +31,7 @@ public class Main {
         String p2 = "3;4;" + "b,b,r,r;" + "r,r,b,b;" + "e,e,e,e;";
 
 
-//        System.out.println(waterSortSearch.solve(p1, "AS1", true));
-        System.out.println(waterSortSearch.solve(p2, "DF", false));
+        System.out.println(waterSortSearch.solve(p1, "ID", true));
+//        System.out.println(waterSortSearch.solve(p2, "DF", false));
     }
 }
