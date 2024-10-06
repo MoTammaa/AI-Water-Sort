@@ -14,7 +14,7 @@ public class WaterSortSearch extends GeneralSearch {
     public static boolean SHOW_DEBUG = false;
 
 
-    public String solve(String initialState, String strategy, boolean visualize) {
+    public static String solve(String initialState, String strategy, boolean visualize) {
         init(initialState, strategy, visualize);
 
         /* ****************************************** */
@@ -33,7 +33,7 @@ public class WaterSortSearch extends GeneralSearch {
         return Node.getSolutionString(currentAgent.getSolutionNode());
     }
 
-    private void init(String initialState, String strategy, boolean visualize) {
+    private static void init(String initialState, String strategy, boolean visualize) {
         SHOW_DEBUG = visualize;
         int strategyVersion = 1;
         if (strategy.length() > 2) strategyVersion = strategy.charAt(2) - '0';
