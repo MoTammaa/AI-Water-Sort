@@ -29,7 +29,7 @@ public abstract class GeneralSearch {
     public boolean GENERAL_SEARCH(){
         while (!this.isSolutionFound()){
             if(!this.SEARCH_NextStep()) return false;
-            if(this.expandedNodesCount % 1000 == 0 && WaterSortSearch.SHOW_DEBUG) System.out.println(this.expandedNodesCount + "     " + this.getFront().getDepth());
+            if(this.expandedNodesCount % 1000 == 0 && this.expandedNodesCount > 0 && WaterSortSearch.SHOW_DEBUG) System.out.println(this.expandedNodesCount + "     " + this.getFront().getDepth());
         }
 
         return true;
