@@ -71,7 +71,7 @@ public class WaterSortVisualizer extends JFrame {
                 int n = WaterSortSearch.BOTTLES_COUNT;
                 ArrayList<code.entites.Color>[] colors = state.getBottles();
 
-                int width = this.getWidth() / (n + 5);
+                int width = this.getWidth() / (n + 5 + (n > 10 ? 6 : 0));
                 int height = this.getHeight() / (WaterSortSearch.MAX_BOTTLE_CAPACITY + 4);
                 int padding = height / 5;
                 int x = padding;
