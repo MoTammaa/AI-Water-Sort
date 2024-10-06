@@ -17,33 +17,33 @@ public class WaterSortVisualizer extends JFrame {
         setTitle("Water Sort Visualizer");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
+        setLayout(new BorderLayout());
 
         drawingPanel = new DrawingPanel();
-        drawingPanel.setBounds(0, 70, 800, 530);
-        add(drawingPanel);
+        add(drawingPanel, BorderLayout.CENTER);
 
-        // next button
-        JButton nextButton = new JButton("Next");
-        nextButton.setBounds(250, 10, 200, 50);
-        nextButton.setBackground(new java.awt.Color(0, 100, 0));
-        nextButton.setFont(new Font("Arial", Font.BOLD, 20));
-        nextButton.setForeground(java.awt.Color.WHITE);
-        // disable focus borders
-        nextButton.setFocusPainted(false);
-        add(nextButton);
-        nextButton.addActionListener(e -> nextStep());
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout());
 
         // previous button
         JButton prevButton = new JButton("Previous");
-        prevButton.setBounds(10, 10, 200, 50);
         prevButton.setBackground(new java.awt.Color(100, 0, 0));
         prevButton.setFont(new Font("Arial", Font.BOLD, 20));
         prevButton.setForeground(java.awt.Color.WHITE);
-        // disable focus borders
         prevButton.setFocusPainted(false);
-        add(prevButton);
         prevButton.addActionListener(e -> prevStep());
+        buttonPanel.add(prevButton);
+
+        // next button
+        JButton nextButton = new JButton("Next");
+        nextButton.setBackground(new java.awt.Color(0, 100, 0));
+        nextButton.setFont(new Font("Arial", Font.BOLD, 20));
+        nextButton.setForeground(java.awt.Color.WHITE);
+        nextButton.setFocusPainted(false);
+        nextButton.addActionListener(e -> nextStep());
+        buttonPanel.add(nextButton);
+
+        add(buttonPanel, BorderLayout.NORTH);
 
         setVisible(true);
     }
