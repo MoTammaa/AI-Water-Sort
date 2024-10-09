@@ -31,9 +31,14 @@ public class Main {
         String p2 = "3;4;" + "b,b,b,r;" + "r,r,r,b;" + "e,e,e,e;";
         String p3nosolution = "3;3;" + "b,r,r;" + "b,b,r;" + "y,e,e;";
         String p4 = "3;3;" + "b,b,b;" + "r,r,r;" + "y,y,y;";
+        String grid0 = "3;" +
+                "4;" +
+                "r,y,r,y;" +
+                "y,r,y,r;" +
+                "e,e,e,e;";
 
 
-        System.out.println(WaterSortSearch.solve(p1, "AS", true));
+        System.out.println(WaterSortSearch.solve(grid0, "UC", true));
         Node cur = WaterSortSearch.currentAgent.getSolutionNode();
         ArrayList<State> steps = new ArrayList<>();
         while (cur != null) {
