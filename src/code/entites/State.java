@@ -49,9 +49,7 @@ public class State implements Cloneable {
                 continue;
             Color baseColor = bottles[i].getFirst();
 
-            // for now, we will assume that the goal is to have maximum 1 bottle with a specific color
-            // , and that means that the total number of layers of the same color is less than or equal Bottle Capacity
-            // TODO: ask TAs
+            // for now, we will assume that the goal is to have one color in each bottle (not maximum 1 bottle with a specific color)
 //            if (goal.contains(baseColor))
 //                return false;
             goal.add(baseColor);

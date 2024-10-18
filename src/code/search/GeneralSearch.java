@@ -58,6 +58,7 @@ public abstract class GeneralSearch {
         for (int from = 0; from < node.getState().getBottles().length; from++)
             for (int to = 0; to < node.getState().getBottles().length; to++){
                 Action pour = new Action(from, to);
+//                if (node.getParent() != null) if (pour.isReverse(node.getParent().pour)) continue;
                 Node child = new Node(node);
 
                 if (child.applyAction(pour) > 0)

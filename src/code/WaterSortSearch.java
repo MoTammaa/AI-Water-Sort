@@ -28,7 +28,7 @@ public class WaterSortSearch extends GeneralSearch {
                 sb.insert(0, current + "\n\n");
                 current = current.getParent();
             }
-            System.out.println("\n\nDepth: " + currentAgent.getSolutionNode().getDepth() + "\n\nExpanded Nodes: " +currentAgent.expandedNodesCount + "\n\n" + sb.toString());
+            System.out.println("\n\nDepth: " + currentAgent.getSolutionNode().getDepth() + "\nSolution Cost: " + currentAgent.getSolutionNode().getPathCost() +"\nExpanded Nodes: " +currentAgent.expandedNodesCount + "\n\n" + sb.toString());
         }
         return Node.getSolutionString(currentAgent.getSolutionNode());
     }
