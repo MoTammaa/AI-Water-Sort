@@ -68,21 +68,13 @@ public class Main {
                 "e,e,e;";
 
         
-        System.out.println(WaterSortSearch.solve(grid4, "UCS", true));
-  
-        
-        Node cur = WaterSortSearch.currentAgent.getSolutionNode();
-        ArrayList<State> steps = new ArrayList<>();
-        while (cur != null) {
-            steps.addFirst(cur.getState());
-            cur = cur.getParent();
-        }
-        WaterSortVisualizer visualizer = new WaterSortVisualizer(steps);
+        System.out.println(WaterSortSearch.solve(grid4, "UCS", false));
 
-        double memoryUsed = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1_000_000;
-        double cpuUtilization = osBean.getProcessCpuLoad() * 100;
-        System.out.println("Memeroy used: " + memoryUsed + " MB");
-        System.out.println("CPU Utilization: " + String.format("%.2f", cpuUtilization)  + "%");
+
+//        double memoryUsed = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1_000_000;
+//        double cpuUtilization = osBean.getProcessCpuLoad() * 100;
+//        System.out.println("Memeroy used: " + memoryUsed + " MB");
+//        System.out.println("CPU Utilization: " + String.format("%.2f", cpuUtilization)  + "%");
     }
     
     

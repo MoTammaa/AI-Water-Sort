@@ -4,6 +4,8 @@ import code.entites.Node;
 import code.entites.State;
 import code.search.GeneralSearch;
 
+import java.util.ArrayList;
+
 public class WaterSortSearch extends GeneralSearch {
     public static int MAX_BOTTLE_CAPACITY = 4,
             BOTTLES_COUNT = 5;
@@ -29,6 +31,10 @@ public class WaterSortSearch extends GeneralSearch {
                 current = current.getParent();
             }
             System.out.println("\n\nDepth: " + currentAgent.getSolutionNode().getDepth() + "\nSolution Cost: " + currentAgent.getSolutionNode().getPathCost() +"\nExpanded Nodes: " +currentAgent.expandedNodesCount + "\n\n" + sb.toString());
+            Node cur = currentAgent.getSolutionNode();
+            ArrayList<State> steps = new ArrayList<>();
+            while (cur != null) { steps.addFirst(cur.getState()); cur = cur.getParent(); }
+            WaterSortVisualizer visualizer = new WaterSortVisualizer(steps);
         }
         return Node.getSolutionString(currentAgent.getSolutionNode());
     }
